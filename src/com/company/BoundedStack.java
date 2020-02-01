@@ -11,16 +11,16 @@ public class BoundedStack<T> {
     private int peek_status;
     private int push_status;
     //pop status
-    public final int pop_init = 0;
-    public final int pop_ok = 1;
-    public final int pop_err = 2;
+    private final int pop_init = 0;
+    private final int pop_ok = 1;
+    private final int pop_err = 2;
     //peek status
-    public final int peek_init = 0;
-    public final int peek_ok = 1;
-    public final int peek_err = 2;
+    private final int peek_init = 0;
+    private final int peek_ok = 1;
+    private final int peek_err = 2;
     //push status
-    public final int push_ok = 1;
-    public final int push_err = 2;
+    private final int push_ok = 1;
+    private final int push_err = 2;
 
     BoundedStack(int size){
         pop_status = pop_init;
@@ -38,7 +38,7 @@ public class BoundedStack<T> {
     }
 
     public T peek(){
-        if(size == 0){
+        if(count == 0){
             peek_status = peek_err;
             return null;
         }else{
@@ -48,7 +48,7 @@ public class BoundedStack<T> {
     }
 
     public T pop(){
-        if(size == 0){
+        if(count == 0){
             pop_status = pop_err;
             return null;
         }else{
