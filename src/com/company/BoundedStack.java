@@ -68,6 +68,13 @@ public class BoundedStack<T> {
         }
     }
 
+    public void clear(){
+        stack = new LinkedList<>();
+        count = 0;
+        pop_status = pop_init;
+        peek_status = peek_init;
+    }
+
     public int getCount() {
         return count;
     }
