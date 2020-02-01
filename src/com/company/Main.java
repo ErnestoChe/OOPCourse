@@ -6,5 +6,6 @@ public class Main {
 	    BoundedStack<Integer> bs = new BoundedStack<>();
 	    bs.pop();
         System.out.println(bs.getPop_status());
+        System.out.println(bs.getPeek_status());
     }
 }

@@ -19,12 +19,14 @@ public class BoundedStack<T> {
     private final int peek_ok = 1;
     private final int peek_err = 2;
     //push status
+    private final int push_init = 0;
     private final int push_ok = 1;
     private final int push_err = 2;
 
     BoundedStack(int size){
         pop_status = pop_init;
         peek_status = peek_init;
+        push_status = push_init;
         stack = new LinkedList<>();
         this.size = size;
         count = 0;
@@ -32,6 +34,7 @@ public class BoundedStack<T> {
     BoundedStack(){
         pop_status = pop_init;
         peek_status = peek_init;
+        push_status = push_init;
         stack = new LinkedList<>();
         this.size = 32;
         count = 0;
