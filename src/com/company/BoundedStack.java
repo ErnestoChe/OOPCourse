@@ -3,13 +3,14 @@ package com.company;
 import java.util.LinkedList;
 
 public class BoundedStack<T> {
-    private LinkedList<T> stack;
-    private int size;
-    private int count;
+    //скрытые поля
+    private LinkedList<T> stack;    //хранилище стека
+    private int size;               //размер стека
+    private int count;              //количество элементов
 
-    private int pop_status;
-    private int peek_status;
-    private int push_status;
+    private int pop_status;         //статус команды pop()
+    private int peek_status;        //статус команды peek()
+    private int push_status;        //статус команды push()
     //pop status
     private final int pop_init = 0;
     private final int pop_ok = 1;
@@ -23,15 +24,18 @@ public class BoundedStack<T> {
     private final int push_ok = 1;
     private final int push_err = 2;
 
-    BoundedStack(int size){
+    BoundedStack(int size){  //конструктор с размером
+        //начальные статусы
         pop_status = pop_init;
         peek_status = peek_init;
         push_status = push_init;
+
         stack = new LinkedList<>();
         this.size = size;
         count = 0;
     }
-    BoundedStack(){
+    BoundedStack(){         //стандартный конструктор
+        //начальные статусы
         pop_status = pop_init;
         peek_status = peek_init;
         push_status = push_init;
@@ -40,7 +44,7 @@ public class BoundedStack<T> {
         count = 0;
     }
 
-    public T peek(){
+    public T peek(){        //возвращает верхний элемент из стека без удаления
         if(count == 0){
             peek_status = peek_err;
             return null;
@@ -50,7 +54,7 @@ public class BoundedStack<T> {
         }
     }
 
-    public T pop(){
+    public T pop(){         //возвращает верхний элмент и удаляет его из стека
         if(count == 0){
             pop_status = pop_err;
             return null;
@@ -61,7 +65,7 @@ public class BoundedStack<T> {
         }
     }
 
-    public void push(T elem){
+    public void push(T elem){       //добавляет элемент в стек
         if(count == size){
             push_status = push_err;
         }else{
@@ -71,17 +75,18 @@ public class BoundedStack<T> {
         }
     }
 
-    public void clear(){
+    public void clear(){        //очищает стек
         stack = new LinkedList<>();
         count = 0;
         pop_status = pop_init;
         peek_status = peek_init;
     }
 
-    public int getCount() {
+    public int getCount() {     //возвращает количество элементов в стеке
         return count;
     }
 
+    //запрос статусов операций
     public int getPop_status() {
         return pop_status;
     }
