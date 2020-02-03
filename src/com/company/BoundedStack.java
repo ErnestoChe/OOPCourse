@@ -2,6 +2,12 @@ package com.company;
 
 import java.util.LinkedList;
 
+/**
+ * в параметр класс элементов <T>
+ * в отличие от обычного стека имеет максимальный размер,
+ * задаваемый при создании
+ *
+ */
 public class BoundedStack<T> {
     //скрытые поля
     private LinkedList<T> stack;    //хранилище стека
@@ -24,67 +30,31 @@ public class BoundedStack<T> {
     private final int push_ok = 1;
     private final int push_err = 2;
 
-    BoundedStack(int size){  //конструктор с размером
-        //начальные статусы
-        pop_status = pop_init;
-        peek_status = peek_init;
-        push_status = push_init;
+    //конструктор с размером
+    //задает начальные статусы для команд peek() pop() push()
+    BoundedStack(int size){ }
+    //стандартный конструктор(по дефолту размер 32)
+    //задает начальные статусы для команд peek() pop() push()
+    BoundedStack(){ }
 
-        stack = new LinkedList<>();
-        this.size = size;
-        count = 0;
-    }
-    BoundedStack(){         //стандартный конструктор
-        //начальные статусы
-        pop_status = pop_init;
-        peek_status = peek_init;
-        push_status = push_init;
-        stack = new LinkedList<>();
-        this.size = 32;
-        count = 0;
-    }
+    //возвращает верхний элемент из стека без удаления
+    //предусловие стек не пустой
+    public T peek(){ }
 
-    public T peek(){        //возвращает верхний элемент из стека без удаления
-        if(count == 0){
-            peek_status = peek_err;
-            return null;
-        }else{
-            peek_status = peek_ok;
-            return stack.getLast();
-        }
-    }
+    //возвращает верхний элмент и удаляет его из стека
+    //предусловие стек не пустой
+    //постусловие из стека удаляется верхний
+    public T pop(){ }
 
-    public T pop(){         //возвращает верхний элмент и удаляет его из стека
-        if(count == 0){
-            pop_status = pop_err;
-            return null;
-        }else{
-            pop_status = pop_ok;
-            count--;
-            return stack.remove(count);
-        }
-    }
 
-    public void push(T elem){       //добавляет элемент в стек
-        if(count == size){
-            push_status = push_err;
-        }else{
-            stack.add(elem);
-            count++;
-            push_status = push_ok;
-        }
-    }
+    //добавляет элемент в стек
+    //постусловие если не превышен размер, добавляется элемент
+    public void push(T elem){ }
 
-    public void clear(){        //очищает стек
-        stack = new LinkedList<>();
-        count = 0;
-        pop_status = pop_init;
-        peek_status = peek_init;
-    }
-
-    public int getCount() {     //возвращает количество элементов в стеке
-        return count;
-    }
+    //очищает стек
+    //постусловие пустой стек с тем же размером
+    //задает начальные статусы для команд peek() pop() push()
+    public void clear(){ }
 
     //запрос статусов операций
     public int getPop_status() {
