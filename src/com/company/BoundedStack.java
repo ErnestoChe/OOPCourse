@@ -8,47 +8,34 @@ import java.util.LinkedList;
  * В отличие от обычного стека имеет максимальный размер,
  * задаваемый при создании
  */
-public class BoundedStack<T> {
-    //скрытые поля
-    private LinkedList<T> stack;    //хранилище стека
-    private int size;               //размер стека
-    private int count;              //количество элементов
+abstract class BoundedStack<T> {
 
-    private int pop_status;         //статус команды pop()
-    private int peek_status;        //статус команды peek()
-    private int push_status;        //статус команды push()
-    //pop status
-    private final int pop_init = 0;
-    private final int pop_ok = 1;
-    private final int pop_err = 2;
-    //peek status
-    private final int peek_init = 0;
-    private final int peek_ok = 1;
-    private final int peek_err = 2;
-    //push status
-    private final int push_init = 0;
-    private final int push_ok = 1;
-    private final int push_err = 2;
+    private final int pop_init = 0; //pop не вызывалась
+    private final int pop_ok = 1;   //последнее выполнение успешно
+    private final int pop_err = 2;  //пустой стек
+
+    private final int peek_init = 0; //peek не вызывалась
+    private final int peek_ok = 1;   //последний вызов вернул корректное значение
+    private final int peek_err = 2;  //пустой стек
+
+    private final int push_init = 0; //ни одного элемента не добавлялось
+    private final int push_ok = 1;   //последнее добавление успешно
+    private final int push_err = 2;  //не хватает места под новый элемент
 
     //конструктор с размером
-    //задает начальные статусы для команд peek() pop() push()
+    //постусловие
+    // задает начальные статусы для команд peek() pop() push()
+    // создан пустой стек
     BoundedStack(int size){ }
-    //стандартный конструктор(по дефолту размер 32)
-    //задает начальные статусы для команд peek() pop() push()
-    BoundedStack(){ }
-
-    //возвращает верхний элемент из стека без удаления
-    //предусловие стек не пустой
-    public T peek(){ }
 
     //возвращает верхний элмент и удаляет его из стека
     //предусловие стек не пустой
     //постусловие из стека удаляется верхний
-    public T pop(){ }
-
+    public T pop(){ return null; }
 
     //добавляет элемент в стек
-    //постусловие если не превышен размер, добавляется элемент
+    //предусловие размер стека не превышен
+    //добавляется элемент
     public void push(T elem){ }
 
     //очищает стек
@@ -56,16 +43,14 @@ public class BoundedStack<T> {
     //задает начальные статусы для команд peek() pop() push()
     public void clear(){ }
 
+    //запросы:
+    //предусловие стек не пустой
+    public T peek(){ }
+
+    public int getSize();
+
     //запрос статусов операций
-    public int getPop_status() {
-        return pop_status;
-    }
-
-    public int getPeek_status() {
-        return peek_status;
-    }
-
-    public int getPush_status() {
-        return push_status;
-    }
+    public int getPop_status(); //pop status
+    public int getPeek_status();//peek status
+    public int getPush_status();//push status
 }
